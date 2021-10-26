@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">lab2</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Hello USTC</string>
+    <string name="nav_header_subtitle">github.com/duguosheng/Android</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="phase_1">Phase 1</string>
+    <string name="phase_2">Phase 2</string>
+    <string name="phase_3">Phase 3</string>
+    <string name="phase_4">Phase 4</string>
+</resources>

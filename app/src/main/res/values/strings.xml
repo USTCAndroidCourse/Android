@@ -35,4 +35,13 @@
         "9月初，在北京考区录取的150名新生提前报到，参加整理校园和修建操场等义务劳动；9月15日，京外新生办理报到注册手续，全校共录取1634名学生。\n\n"
         "开学前夕，郭沫若起草校歌歌词，并广泛征求修改意见。9月19日，郭沫若与全体学生第一次见面，并请校歌作曲者、全国音协主席吕骥为学生教唱校歌《永恒的东风》。\n"
     </string>
+    <string name="title_activity_home">HomeActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

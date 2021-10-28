@@ -94,4 +94,9 @@ public class MainActivity extends AppCompatActivity {
         mOrderMessage = getString(R.string.froyo_order_message);
         displayToast(mOrderMessage);
     }
+
+    public void goHome(View view) {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+    }
 }

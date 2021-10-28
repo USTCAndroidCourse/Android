@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lab2">
         <activity
+            android:name=".HomeActivity"
+            android:exported="true"
+            android:label="@string/title_activity_home"
+            android:theme="@style/Theme.Lab2.NoActionBar" />
+        <activity
             android:name=".ScrollingActivity"
             android:exported="true"
             android:label="@string/title_activity_scrolling"

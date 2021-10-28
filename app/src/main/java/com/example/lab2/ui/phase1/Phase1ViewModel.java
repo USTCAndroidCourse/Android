@@ -10,7 +10,7 @@ public class Phase1ViewModel extends ViewModel {
 
     public Phase1ViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("USTC Desserts");
     }
 
     public LiveData<String> getText() {

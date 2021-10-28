@@ -3,7 +3,10 @@ package com.example.lab2;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.ui.AppBarConfiguration;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -43,5 +46,4 @@ public class FirstFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
 }

@@ -7,6 +7,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -70,5 +71,10 @@ public class HomeActivity extends AppCompatActivity {
 // Give the RecyclerView a default layout manager.
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         // Get a handle to the RecyclerView.
+    }
+
+    public void changeColor(View view){
+        TextView tv = findViewById(R.id.word);
+        tv.setTextColor(0xffff0000);
     }
 }

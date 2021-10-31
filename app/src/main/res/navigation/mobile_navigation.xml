@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/phase_1">
+
+    <fragment
+        android:id="@+id/phase_1"
+        android:name="com.example.lab2.ui.phase1.Phase1Fragment"
+        android:label="@string/phase_1"
+        tools:layout="@layout/fragment_phase1" />
+
+    <fragment
+        android:id="@+id/phase_2"
+        android:name="com.example.lab2.ui.phase2.Phase2Fragment"
+        android:label="@string/phase_2"
+        tools:layout="@layout/fragment_phase2" />
+
+    <fragment
+        android:id="@+id/phase_3"
+        android:name="com.example.lab2.ui.phase3.Phase3Fragment"
+        android:label="@string/phase_3"
+        tools:layout="@layout/fragment_phase3" />
+    <fragment
+        android:id="@+id/phase_4"
+        android:name="com.example.lab2.ui.phase4.Phase4Fragment"
+        android:label="@string/phase_4"
+        tools:layout="@layout/fragment_phase4" />
+</navigation>

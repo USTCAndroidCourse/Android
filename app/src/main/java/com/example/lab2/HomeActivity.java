@@ -1,5 +1,7 @@
 package com.example.lab2;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -28,9 +30,11 @@ public class HomeActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private WordListAdapter mAdapter;
+    static int count=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
@@ -75,6 +79,14 @@ public class HomeActivity extends AppCompatActivity {
 
     public void changeColor(View view){
         TextView tv = findViewById(R.id.word);
-        tv.setTextColor(0xffff0000);
+        if (count==0)
+        {
+            tv.setTextColor(0xffff0000);
+            count=1;
+        } else if (count == 1) {
+
+            tv.setTextColor(0xff000000);
+            count=0;
+        }
     }
 }

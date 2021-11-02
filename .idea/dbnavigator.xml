@@ -25,13 +25,13 @@
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
     <loaded-nodes>
-      <connection connection-id="23aca88d-f74d-4a36-ac1c-5829462da5ef">
+      <connection connection-id="c464926c-b69e-4da1-8495-d86601dfb937">
         <schema name="main" object-types="table, view, constraint, index, column, dataset trigger" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="23aca88d-f74d-4a36-ac1c-5829462da5ef">
+    <connection id="c464926c-b69e-4da1-8495-d86601dfb937">
       <console name="Connection" type="STANDARD" schema="main" session="Main" />
     </connection>
   </component>
@@ -39,10 +39,11 @@
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="23aca88d-f74d-4a36-ac1c-5829462da5ef" />
+    <connection id="c464926c-b69e-4da1-8495-d86601dfb937" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="23aca88d-f74d-4a36-ac1c-5829462da5ef" dataset="main.UsageStats" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="c464926c-b69e-4da1-8495-d86601dfb937" dataset="main.UsageStats" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="c464926c-b69e-4da1-8495-d86601dfb937" dataset="main.android_metadata" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -70,7 +71,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="23aca88d-f74d-4a36-ac1c-5829462da5ef" active="true">
+      <connection id="c464926c-b69e-4da1-8495-d86601dfb937" active="true">
         <database>
           <name value="Connection" />
           <description value="" />
@@ -85,7 +86,7 @@
           <port value="" />
           <database value="" />
           <files>
-            <file path="D:\Study\CustomUsage.db" schema="main" />
+            <file path="D:\CustomUsage.db" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />

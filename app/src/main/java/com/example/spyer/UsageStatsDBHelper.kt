@@ -1,56 +1,91 @@
 package com.example.spyer
 
 import android.annotation.SuppressLint
+import android.app.ActivityManager
 import android.app.usage.UsageStats
-import android.content.ContentValues
 import android.content.Context
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 
-class UsageStatsDBHelper(private val context: Context, name: String, version: Int) :
+class UsageStatsDBHelper(context: Context, name: String, version: Int) :
     SQLiteOpenHelper(context, name, null, version) {
 
-    private val createTable = "create table UsageStats (" +
-            "packageName text primary key," +           // 将包名设为主键
-            "firstTimeStamp integer," +                 // 查询起始时间戳
-            "lastTimeStamp integer," +                  // 查询结束时间戳
-            "LastTimeForegroundServiceUsed integer," +  //上一次前台服务使用的时间
-            "lastTimeUsed integer," +                   // 上次使用的时间
-            "lastTimeVisible integer," +                // 软件的Activity上次可见的时间
-            "totalTimeForegroundServiceUsed integer," + // 前台服务使用总时间
-            "totalTimeInForeground integer," +          // 在前台花费的总时间，以毫秒为单位
-            "totalTimeVisible integer)"                 // 获取此包的活动在UI中可见的总时间，以毫秒为单位
+    private val statsTableName = "UsageStats"
+    private val runTableName = "UsageRun"
+    private val usageStatsData = UsageStatsData()
+    private val usageRunData = UsageRunData()
+    private val createStatsTable = usageStatsData.generateCreateSql(statsTableName)
+    private val createRunTable = usageRunData.generateCreateSql(runTableName)
+    private val packageManager = context.packageManager
+    private val activityManager =
+        context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
 
     override fun onCreate(db: SQLiteDatabase?) {
-        db?.execSQL(createTable)
+        db?.execSQL(createStatsTable)
+        db?.execSQL(createRunTable)
+    }
+
+    /**
+     * 判断是否为用户程序
+     */
+    private fun isUserApp(packageName: String): Boolean {
+        val appInfo: ApplicationInfo;
+        try {
+            appInfo = packageManager.getApplicationInfo(
+                packageName,
+                PackageManager.MATCH_UNINSTALLED_PACKAGES
+            )
+        } catch (e: PackageManager.NameNotFoundException) {
+            return false
+        }
+        return (appInfo.flags and ApplicationInfo.FLAG_SYSTEM) == 0 &&
+                (appInfo.flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) == 0
     }
 
     @SuppressLint("Recycle")
-    fun storeUsageData(usageStatsDataMap: Map<String, UsageStats>) {
+    fun storeStatsData(usageStatsDataMap: Map<String, UsageStats>) {
         val db = writableDatabase
-        usageStatsDataMap.forEach { usageStats ->
-            val value = ContentValues().apply {
-                put("packageName", usageStats.key)
-                val data = usageStats.value
-                put("firstTimeStamp", data.firstTimeStamp)
-                put("lastTimeStamp", data.lastTimeStamp)
-                put("LastTimeForegroundServiceUsed", data.lastTimeForegroundServiceUsed)
-                put("lastTimeUsed", data.lastTimeUsed)
-                put("lastTimeVisible", data.lastTimeVisible)
-                put("totalTimeForegroundServiceUsed ", data.totalTimeForegroundServiceUsed)
-                put("totalTimeInForeground", data.totalTimeInForeground)
-                put("totalTimeVisible", data.totalTimeVisible)
-            }
-            val cursor =
-                db.query("UsageStats", null, "packageName = ?", arrayOf(usageStats.key), null, null,null)
+        storeRunData()
+        // db.delete(statsTableName, null, null)
+        usageStatsDataMap.forEach { usageStatsMap ->
+            val usageStats = usageStatsMap.value
+            // 不统计非用户程序
+            if (!isUserApp(usageStats.packageName))
+                return@forEach
+
+            Log.e("HAHA", "Insert Data")
+            val value = usageStatsData.contentValues(usageStats)
+            val cursor = db.query(
+                statsTableName,
+                null,
+                "${usageStatsData.keyName()} = ?",
+                arrayOf(usageStatsData.keyValue()),
+                null,
+                null,
+                null
+            )
             if (!cursor.moveToFirst()) {
-                db.insert("UsageStats", null, value)
+                // 如果键值此前不存在，则插入
+                db.insert(statsTableName, null, value)
             } else {
-                value.remove("packageName")
-                db.update("UsageStats", value, "packageName = ?", arrayOf(usageStats.key))
+                // 否则更新数据
+                value.remove(usageStatsData.keyName())
+                db.update(
+                    statsTableName,
+                    value,
+                    "${usageStatsData.keyName()} = ?",
+                    arrayOf(usageStatsData.keyValue())
+                )
             }
         }
+    }
 
+    private fun storeRunData() {
+        val processes = activityManager.runningAppProcesses
+        processes.
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

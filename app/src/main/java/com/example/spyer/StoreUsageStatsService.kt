@@ -8,10 +8,8 @@ import android.app.Service
 import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.IBinder
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import java.text.SimpleDateFormat
@@ -39,9 +37,8 @@ class StoreUsageStatsService(
             Looper.prepare()
             Toast.makeText(this, "暂无权限，请在设置中开启", Toast.LENGTH_SHORT).show()
             Looper.loop()
-            Log.e("USAGE_STATAS", "loop finish")
         } else
-            dbHelper.storeUsageData(usageStatsMap)  // 存储数据库
+            dbHelper.storeStatsData(usageStatsMap)
     }
 
     // 在Service生成时初始化mUsageStatsManager和dbHelper
@@ -72,32 +69,14 @@ class StoreUsageStatsService(
     // 启动查询系统使用数据线程，并将结果存储到SQLite
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         thread {
-            storeUsageStatsData()
-            stopSelf()  // 采集完成，停止Service
+            while (true)
+                storeUsageStatsData()
+            // stopSelf()  // 采集完成，停止Service
         }
         return super.onStartCommand(intent, flags, startId)
     }
 
     override fun onBind(intent: Intent?): IBinder? {
         TODO("Not yet implemented")
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    fun longToDate(lo: Long): String? {
-        val date = Date(lo)
-        val sd = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-        return sd.format(date)
-    }
-
-    fun longToTime(lo: Long): String {
-        var tmp = lo
-        val ms = (tmp % 1000).toString() + "ms"
-        tmp /= 1000
-        val s = (tmp % 60).toString() + "s "
-        tmp /= 60
-        val m = (tmp % 60).toString()
-        tmp /= 60
-        val h = tmp.toString() + "h "
-        return h + m + s + ms
     }
 }

@@ -11,4 +11,37 @@
     <string name="phase_2">Phase 2</string>
     <string name="phase_3">Phase 3</string>
     <string name="phase_4">Phase 4</string>
+    <string name="donuts">Donuts are glazed and sprinkled with candy.</string>
+    <string name="icecream">Ice cream sandwiches have chocolate wafers and vanilla filling.</string>
+    <string name="froyo">FroYo is premium self-serve frozen yogurt.</string>
+
+    <string name="donut_order_message">You added a donut into shopping cart.</string>
+    <string name="ice_cream_order_message">You added a ice cream sandwich into shopping cart.</string>
+    <string name="froyo_order_message">You added a FroYo into shopping cart.</string>
+    <string name="shopping_cart">Shopping Cart</string>
+    <string name="title_activity_scrolling">USTC 校史</string>
+    <string name="large_text">
+        "20世纪50年代，中国当时的科技力量和综合国力十分薄弱，难以适应国家发展和国际竞争的需要。作为全国学术科研中心的中国科学院虽拥有众多的高级科学人才，但急需补充优秀的后备力量，特别是国内新兴技术学科方面的尖端科技人才。而当时从高等学校分配的毕业生，在数量和质量上都难以满足需要。在这种情况下，利用中国科学院自身优势，创办一所培养新兴、边缘、交叉学科尖端技术科技人才的新型大学，就成为科学院领导和许多科学家的共同构想。\n\n"
+        "1958年3月18日，在中科院第三次院务常务会议上，院长郭沫若提出，为了培养干部，可以考虑科学院附设高等学校。\n
+        1958年5月9日，中国科学院党组书记张劲夫代表科学院党组向负责全国科技工作的聂荣臻副总理和中宣部呈交请示，建议由中国科学院试办一所大学。聂荣臻副总理随即向周恩来总理汇报科学院拟办大学一事，得到周恩来总理的首肯。5月21日，聂荣臻副总理向中共中央书记处提交报告。\n
+1958年6月2日，经中共中央书记处会议讨论后，中央政治局常委、总书记邓小平批示“书记处会议批准这个报告，决定成立这个大学。”刘少奇、周恩来、陈云等也审批同意了中央书记处的决定。
+        \n"
+        "1958年6月8日，中国科学院院长郭沫若主持召开学校筹备委员会第一次会议，决定学校定名为“中国科学技术大学”。同时成立大学筹备委员会，会议通过了建校方案和1958年招生简章，明确教学设备原则上由科学院各有关研究所负责。会议决定学校设置原子核物理和原子核工程系、技术物理系、化学物理系、物理热工系、无线电电子学系、自动化系、力学和力学工程系、放射化学和辐射化学系、地球化学和稀有元素系、高分子化学和高分子物理系、应用数学和计算机技术系、生物物理系等12个系；并与北京大学、清华大学建立联系协作关系。"
+       </string>
+    <string name="large_text2">
+        "同年7月28日，学校筹备委员会举行第一次系主任会议，会议决定增设应用地球物理系，成立普通物理、普通化学、数学和政治课等四个小组。\n\n"
+        "根据聂荣臻副总理指示，原中央党校在玉泉路的二部让给中国科大当校址，中国科学院院部和各研究所支援了一大批干部、教室、工人、图书资料和实验设备。\n\n"
+        "为解决招生问题，中国科学院党组报请中央批准，从各省、市当年考生中由中国科大优先录取1600名新生。6月18日，《人民日报》、《光明日报》、《中国青年报》登载了中国科大招生简章。\n\n"
+        "9月初，在北京考区录取的150名新生提前报到，参加整理校园和修建操场等义务劳动；9月15日，京外新生办理报到注册手续，全校共录取1634名学生。\n\n"
+        "开学前夕，郭沫若起草校歌歌词，并广泛征求修改意见。9月19日，郭沫若与全体学生第一次见面，并请校歌作曲者、全国音协主席吕骥为学生教唱校歌《永恒的东风》。\n"
+    </string>
+    <string name="title_activity_home">HomeActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

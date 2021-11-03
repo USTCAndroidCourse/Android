@@ -25,25 +25,26 @@
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
     <loaded-nodes>
-      <connection connection-id="c464926c-b69e-4da1-8495-d86601dfb937">
+      <connection connection-id="63f6313e-9314-4f42-8155-3f860c487585">
         <schema name="main" object-types="table, view, constraint, index, column, dataset trigger" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="c464926c-b69e-4da1-8495-d86601dfb937">
+    <connection id="63f6313e-9314-4f42-8155-3f860c487585">
       <console name="Connection" type="STANDARD" schema="main" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="63f6313e-9314-4f42-8155-3f860c487585" object-ref="schemas/main/tables/UsageRun" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="c464926c-b69e-4da1-8495-d86601dfb937" />
+    <connection id="63f6313e-9314-4f42-8155-3f860c487585" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="c464926c-b69e-4da1-8495-d86601dfb937" dataset="main.UsageStats" active-filter-id="EMPTY_FILTER" />
-    <filter-actions connection-id="c464926c-b69e-4da1-8495-d86601dfb937" dataset="main.android_metadata" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="63f6313e-9314-4f42-8155-3f860c487585" dataset="main.UsageRun" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -71,7 +72,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="c464926c-b69e-4da1-8495-d86601dfb937" active="true">
+      <connection id="63f6313e-9314-4f42-8155-3f860c487585" active="true">
         <database>
           <name value="Connection" />
           <description value="" />

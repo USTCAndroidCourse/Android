@@ -1,29 +1,26 @@
 package com.example.spyer
 
 import android.annotation.SuppressLint
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.app.Service
+import android.app.*
 import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.Intent
+import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
-import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.concurrent.thread
 
 /** 存储用户使用数据的Service
  *
  * @author 杜国胜
  */
-class StoreUsageStatsService(
-) : Service() {
+class StoreUsageStatsService : Service() {
     private lateinit var mUsageStatsManager: UsageStatsManager
     private lateinit var dbHelper: UsageStatsDBHelper
+    private lateinit var storeDataThread: Thread
 
     private fun storeUsageStatsData() {
         val cal = Calendar.getInstance()
@@ -38,11 +35,12 @@ class StoreUsageStatsService(
             Toast.makeText(this, "暂无权限，请在设置中开启", Toast.LENGTH_SHORT).show()
             Looper.loop()
         } else
-            dbHelper.storeStatsData(usageStatsMap)
+            dbHelper.storeData(usageStatsMap)
     }
 
     // 在Service生成时初始化mUsageStatsManager和dbHelper
     // 同时开启前台Service
+    @SuppressLint("UnspecifiedImmutableFlag")
     override fun onCreate() {
         super.onCreate()
         mUsageStatsManager = getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
@@ -67,13 +65,26 @@ class StoreUsageStatsService(
     }
 
     // 启动查询系统使用数据线程，并将结果存储到SQLite
+    @SuppressLint("UnspecifiedImmutableFlag")
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        thread {
-            while (true)
-                storeUsageStatsData()
-            // stopSelf()  // 采集完成，停止Service
+        storeDataThread = Thread() {
+            try {
+                while (true) {
+                    storeUsageStatsData()
+                    Thread.sleep(1000)
+                }
+            } catch (e: InterruptedException) {
+                stopSelf()
+            }
         }
+        storeDataThread.start()
         return super.onStartCommand(intent, flags, startId)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // 推出子线程
+        storeDataThread.interrupt()
     }
 
     override fun onBind(intent: Intent?): IBinder? {

@@ -5,9 +5,6 @@ import com.example.spyer.UsageData.Column
 
 class UsageRunData : UsageData {
     private var startTime: Long = 0            // 启动时间为主键
-    private var stopTime: Long = 0             // 应用终止时间
-    private var runTime: Long = 0              // 运行时间
-    private lateinit var packageName: String   // 应用包名
 
     override fun keyName(): String {
         return "startTime"
@@ -26,26 +23,18 @@ class UsageRunData : UsageData {
             Column("startTime", "integer"),
             Column("stopTime", "integer"),
             Column("runTime", "integer"),
-            Column("packageName", "integer"),
+            Column("packageName", "text"),
         )
     }
 
     fun contentValues(startTime: Long, stopTime: Long, packageName: String): ContentValues {
-        updateData(startTime, stopTime, packageName)
+        this.startTime = startTime
         return ContentValues().apply {
             put("startTime", startTime)
             put("stopTime", stopTime)
-            put("runTime", runTime)
+            put("runTime", stopTime - startTime)
             put("packageName", packageName)
         }
     }
 
-    private fun updateData(startTime: Long, stopTime: Long, packageName: String) {
-        if (startTime != 0L) {
-            this.startTime = startTime
-            this.packageName = packageName
-        }
-        this.stopTime = stopTime
-        this.runTime = this.stopTime - this.startTime
-    }
 }

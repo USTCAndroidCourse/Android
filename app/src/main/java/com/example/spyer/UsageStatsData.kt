@@ -57,6 +57,12 @@ open class UsageStatsData : UsageData {
     }
 
     @SuppressLint("DiscouragedPrivateApi")
+    fun getLaunchCount(usageStats: UsageStats): Int {
+        val field = usageStats.javaClass.getDeclaredField("mLaunchCount")
+        field.isAccessible = true
+        return field.getInt(usageStats)
+    }
+
     private fun updateData(usageStats: UsageStats) {
         packageName = usageStats.packageName
         firstTimeStamp = usageStats.firstTimeStamp
@@ -67,8 +73,6 @@ open class UsageStatsData : UsageData {
         totalTimeForegroundServiceUsed = usageStats.totalTimeForegroundServiceUsed
         totalTimeInForeground = usageStats.totalTimeInForeground
         totalTimeVisible = usageStats.totalTimeVisible
-        val field = usageStats.javaClass.getDeclaredField("mLaunchCount")
-        field.isAccessible = true
-        launchCount = field.getInt(usageStats)
+        launchCount = getLaunchCount(usageStats)
     }
 }

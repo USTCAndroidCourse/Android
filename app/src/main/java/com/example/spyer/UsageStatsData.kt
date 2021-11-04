@@ -5,6 +5,11 @@ import android.app.usage.UsageStats
 import android.content.ContentValues
 import com.example.spyer.UsageData.Column
 
+/**
+ * 统计数据类
+ * 此类中的数据均是由系统API可直接获取的
+ * @author 杜国胜
+ */
 open class UsageStatsData : UsageData {
     private lateinit var packageName: String              // 应用包名
     private var firstTimeStamp: Long = 0                  // 查询起始时间戳
@@ -25,6 +30,10 @@ open class UsageStatsData : UsageData {
         return packageName
     }
 
+    /**
+     * 获取列属性
+     * @return 属性列表，元素格式是[名称 类型]
+     */
     override fun getColumns(): List<Column> {
         return listOf(
             Column("packageName", "text"),
@@ -40,6 +49,11 @@ open class UsageStatsData : UsageData {
         )
     }
 
+    /**
+     * 生成插入数据库表所需的数据格式
+     * @param usageStats 系统API中的用户统计类对象
+     * @return 可用于insert或update的contentValue格式
+     */
     fun contentValues(usageStats: UsageStats): ContentValues {
         updateData(usageStats)
         return ContentValues().apply {
@@ -56,6 +70,12 @@ open class UsageStatsData : UsageData {
         }
     }
 
+    /**
+     * 使用反射获取应用启动次数
+     * @author 刘东阳
+     * @param usageStats 系统API中的用户统计类对象
+     * @return 应用启动次数
+     */
     @SuppressLint("DiscouragedPrivateApi")
     fun getLaunchCount(usageStats: UsageStats): Int {
         val field = usageStats.javaClass.getDeclaredField("mLaunchCount")
@@ -63,6 +83,9 @@ open class UsageStatsData : UsageData {
         return field.getInt(usageStats)
     }
 
+    /**
+     * 更新数据
+     */
     private fun updateData(usageStats: UsageStats) {
         packageName = usageStats.packageName
         firstTimeStamp = usageStats.firstTimeStamp

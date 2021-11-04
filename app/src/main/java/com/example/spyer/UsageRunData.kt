@@ -3,6 +3,10 @@ package com.example.spyer
 import android.content.ContentValues
 import com.example.spyer.UsageData.Column
 
+/**
+ * 用户运行时间类
+ * @author 杜国胜
+ */
 class UsageRunData : UsageData {
     private var startTime: Long = 0            // 启动时间为主键
 

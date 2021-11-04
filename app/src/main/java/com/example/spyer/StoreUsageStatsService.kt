@@ -5,15 +5,15 @@ import android.app.*
 import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.Intent
-import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import java.util.*
 
-/** 存储用户使用数据的Service
+/**
+ * 存储用户使用数据的前台Service，当用户主界面被销毁时
+ * Service也将被终止
  *
  * @author 杜国胜
  */
@@ -22,7 +22,13 @@ class StoreUsageStatsService : Service() {
     private lateinit var dbHelper: UsageStatsDBHelper
     private lateinit var storeDataThread: Thread
 
-    private fun storeUsageStatsData() {
+    /**
+     * 调用UsageStatsDBHelper中的API存储用户数据
+     * 包括UsageStats和UsageRun两种数据
+     * 前者是直接通过系统API获取的，以包名为主键
+     * 后者是计算而来的，以启动时间为主键
+     */
+    private fun storeUsageData() {
         val cal = Calendar.getInstance()
         cal.add(Calendar.YEAR, -1)
         // 查询最近一年的数据
@@ -38,8 +44,10 @@ class StoreUsageStatsService : Service() {
             dbHelper.storeData(usageStatsMap)
     }
 
-    // 在Service生成时初始化mUsageStatsManager和dbHelper
-    // 同时开启前台Service
+    /**
+     * 在Service生成时初始化mUsageStatsManager和dbHelper
+     * 同时开启前台Service
+     */
     @SuppressLint("UnspecifiedImmutableFlag")
     override fun onCreate() {
         super.onCreate()
@@ -64,13 +72,16 @@ class StoreUsageStatsService : Service() {
         startForeground(1, notification)
     }
 
-    // 启动查询系统使用数据线程，并将结果存储到SQLite
+    /**
+     * 启动查询系统使用数据线程，并将结果存储到SQLite
+     * 每隔一秒线程查询一次
+     */
     @SuppressLint("UnspecifiedImmutableFlag")
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         storeDataThread = Thread() {
             try {
                 while (true) {
-                    storeUsageStatsData()
+                    storeUsageData()
                     Thread.sleep(1000)
                 }
             } catch (e: InterruptedException) {
@@ -83,7 +94,7 @@ class StoreUsageStatsService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-        // 推出子线程
+        // 退出子线程
         storeDataThread.interrupt()
     }
 

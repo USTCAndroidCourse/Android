@@ -17,9 +17,9 @@ import java.util.*
  *
  * @author 杜国胜
  */
-class StoreUsageStatsService : Service() {
+class StoreUsageDataService : Service() {
     private lateinit var mUsageStatsManager: UsageStatsManager
-    private lateinit var dbHelper: UsageStatsDBHelper
+    private lateinit var dbHelper: UsageDataDBHelper
     private lateinit var storeDataThread: Thread
 
     /**
@@ -52,7 +52,7 @@ class StoreUsageStatsService : Service() {
     override fun onCreate() {
         super.onCreate()
         mUsageStatsManager = getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
-        dbHelper = UsageStatsDBHelper(this, "CustomUsage.db", 1)
+        dbHelper = UsageDataDBHelper(this, "CustomUsage.db", 1)
         // 使用前台Service
         val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val channel = NotificationChannel(

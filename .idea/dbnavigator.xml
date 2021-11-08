@@ -38,12 +38,14 @@
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files>
       <object connection-id="63f6313e-9314-4f42-8155-3f860c487585" object-ref="schemas/main/tables/UsageRun" />
+      <object connection-id="63f6313e-9314-4f42-8155-3f860c487585" object-ref="schemas/main/tables/UsageStats" />
     </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="63f6313e-9314-4f42-8155-3f860c487585" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="63f6313e-9314-4f42-8155-3f860c487585" dataset="main.UsageStats" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="63f6313e-9314-4f42-8155-3f860c487585" dataset="main.UsageRun" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">

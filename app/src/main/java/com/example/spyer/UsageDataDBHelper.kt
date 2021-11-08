@@ -12,7 +12,7 @@ import android.util.Log
  * 数据库类，持久化存储收集的数据
  * @author 杜国胜
  */
-class UsageStatsDBHelper(context: Context, name: String, version: Int) :
+class UsageDataDBHelper(context: Context, name: String, version: Int) :
     SQLiteOpenHelper(context, name, null, version) {
 
     private val statsTableName = "UsageStats"                                          // 统计数据表名

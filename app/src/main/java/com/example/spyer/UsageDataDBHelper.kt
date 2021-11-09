@@ -95,6 +95,7 @@ class UsageDataDBHelper(context: Context, name: String, version: Int) :
             )
         }
         cursor.close()
+        db.close()
     }
 
     /**
@@ -107,6 +108,7 @@ class UsageDataDBHelper(context: Context, name: String, version: Int) :
             startTime, endTime, packageName
         )
         db.insert(runTableName, null, value)
+        db.close()
     }
 
     /**
